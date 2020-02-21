@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+  }
+
+  .slider {
+      width: 90%;
+      margin: 100px auto;
+  }
+
+  .slick-slide {
+    margin: 0px 20px;
+  }
+
+  .slick-slide img {
+    width: 100%;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: white;
+  }
+
+
+  .slick-slide {
+    transition: all ease-in-out .3s;
+  } 
+
+  .carousel-control {
+    border-width: 0 !important;
+    width: 3% !important;
+  }
+
+  .left {
+    z-index: 1;
+  }

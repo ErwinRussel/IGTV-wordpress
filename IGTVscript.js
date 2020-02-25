@@ -19,6 +19,7 @@
       });
 
       $(".regular").slick({
+        adaptiveHeight: false,
         dots: false,
         infinite: false,
         prevArrow: '<button class="left carousel-control" aria-label="Previous" type="button"><i class="glyphicon glyphicon-chevron-left"></i></button>',

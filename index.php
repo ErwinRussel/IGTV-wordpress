@@ -118,8 +118,8 @@ function request_check($atts){
 
     if(sizeof($IGTVobjects)<6){
         $loop = sizeof($IGTVobjects);
-        for($x = 0; $x < 6 - $loop; $x++){
-            echo "<div class=\"slick-tile\" style=\"border: 1px solid white; height: 9vw;\"><img></div>";
+        for($x = 0; $x < 7 - $loop; $x++){
+            echo "<div class=\"slick-tile\" style=\"border: 1px solid white;\"><img></div>";
         }
     }
     

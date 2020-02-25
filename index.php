@@ -61,8 +61,10 @@ function callback_for_setting_up_scripts() {
 // IGTV REQUEST
 
 function request_check($atts){
-    echo "<div class=\"igtv-plugin\">";
-    echo "<section class=\"regular slider\">";
+    $output = "";
+
+    $output .= "<div class=\"igtv-plugin\">";
+    $output .= "<section class=\"regular slider\">";
 
     $url = "https://www.instagram.com/" . get_option('igtv-handle') . "/?__a=1";
     // $url = 'https://www.instagram.com/thefirm.official/?__a=1';
@@ -91,21 +93,21 @@ function request_check($atts){
 
                 $src = $resJSON->graphql->shortcode_media->video_url;
 
-                echo "<div class=\"item slick-tile";
+                $output .= "<div class=\"item slick-tile";
                 if($first){
-                    echo " active";
+                    $output .= " active";
                     $first = false;
                 }
-                echo "\">";
-                echo "<div class=\"video-wrapper\">";
-                echo "<video class=\"img-responsive\" controls=\"\" 
+                $output .= "\">";
+                $output .= "<div class=\"video-wrapper\">";
+                $output .= "<video class=\"img-responsive\" controls=\"\" 
                 controlslist=\"nodownload\" 
                 playsinline=\"\" 
                 style=\"width:100%; height:auto\"
                 poster=\"". $poster ."\" preload=\"metadata\" type=\"video/mp4\" src=\"". $src ."\" 
                 loop=\"\"></video>";
-                echo "</div>";
-                echo "</div>";
+                $output .= "</div>";
+                $output .= "</div>";
             }
 
         }
@@ -114,14 +116,14 @@ function request_check($atts){
     if(sizeof($IGTVobjects)<6){
         $loop = sizeof($IGTVobjects);
         for($x = 0; $x < 7 - $loop; $x++){
-            echo "<div class=\"slick-tile\" style=\"border: 2px solid #282828;\"><img></div>";
+            $output .= "<div class=\"slick-tile\" style=\"border: 2px solid #282828;\"><img></div>";
         }
     }
     
-    echo "</section>";
-    echo "</div>";
+    $output .= "</section>";
+    $output .= "</div>";
 
-
+    return $output;
 }
 
 // SHORTCODE

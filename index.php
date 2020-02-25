@@ -50,12 +50,12 @@ add_action( 'parse_query', 'wtnerd_global_vars' );
 add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
 
 function callback_for_setting_up_scripts() {
-    wp_enqueue_style( 'slick-css', plugins_url() . '/wordpress-IGTV/slick/slick/slick.css');
-    wp_enqueue_style( 'slick-css-theme', plugins_url() . '/wordpress-IGTV/slick/slick/slick-theme.css', 'slick-css', true );
-    wp_enqueue_style( 'IGTVstyle', plugins_url() . '/wordpress-IGTV/css/IGTVstyle.css', array('slick-css','slick-css-theme'), true );
+    wp_enqueue_style( 'slick-css', plugin_dir_url( __FILE__ ) . '/slick/slick/slick.css');
+    wp_enqueue_style( 'slick-css-theme', plugin_dir_url( __FILE__ ) . '/slick/slick/slick-theme.css', 'slick-css', true );
+    wp_enqueue_style( 'IGTVstyle', plugin_dir_url( __FILE__ ) . '/IGTVstyle.css', array('slick-css','slick-css-theme'), true );
     wp_enqueue_script( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js', array('jquery'), '3.4.1', true );
-    wp_enqueue_script( 'slickjs', plugins_url() . '/wordpress-IGTV/slick/slick/slick.js', array ( 'jquery' ), false ,true);
-    wp_enqueue_script('IGTVscript', plugins_url() .'/wordpress-IGTV/js/IGTVscript.js', array ( 'jquery' ), false ,true);
+    wp_enqueue_script( 'slickjs', plugin_dir_url( __FILE__ ) . '/slick/slick/slick.js', array ( 'jquery' ), false ,true);
+    wp_enqueue_script('IGTVscript', plugin_dir_url( __FILE__ ) .'/IGTVscript.js', array ( 'jquery' ), false ,true);
 }
 
 // IGTV REQUEST

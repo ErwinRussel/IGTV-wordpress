@@ -28,6 +28,7 @@ function settings_panel(){
     ?>
     <div class="wrap">
     <h1>IGTV Plugin</h1>
+    <h4>Add the shortcode "[IGTV-wordpress]" to a page.</h4>
     <form action="options.php" method="post">
     <?php
     settings_fields( 'igtv_plugin_options_group' );
@@ -38,12 +39,6 @@ function settings_panel(){
     </form>
     </div>
     <?php
-    if(isset($_POST['handle'])) {
-        // Check that sets is numeric, and above 0
-        if(is_numeric($_POST['handle']) && $_POST['handle'] > 0) {
-            $instagram_handle = $_POST['handle'];
-        }
-    }
 }
 
 add_action( 'parse_query', 'wtnerd_global_vars' );
@@ -129,6 +124,6 @@ function request_check($atts){
 }
 
 // SHORTCODE
-
 add_shortcode('IGTV-wordpress', 'request_check');
+
 ?>

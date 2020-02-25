@@ -44,24 +44,31 @@ function test_init(){
         }
     }
 }
+
+add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
+
+function callback_for_setting_up_scripts() {
+    wp_enqueue_style( 'slick-css', plugins_url() . '/wordpress-IGTV/slick/slick/slick.css');
+    wp_enqueue_style( 'slick-css-theme', plugins_url() . '/wordpress-IGTV/slick/slick/slick-theme.css', 'slick-css', true );
+    wp_enqueue_style( 'IGTVstyle', plugins_url() . '/wordpress-IGTV/IGTVstyle.css', array('slick-css','slick-css-theme'), true );
+    wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css', '3.4.1', true );
+    wp_enqueue_script( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js', array('jquery'), '3.4.1', true );
+    wp_enqueue_script( 'slickjs', plugins_url() . '/wordpress-IGTV/slick/slick/slick.js', array ( 'jquery' ), false ,true);
+    wp_enqueue_script('IGTVscript', plugins_url() .'/wordpress-IGTV/IGTVscript.js', array ( 'jquery' ), false ,true);
+}
+
 add_action( 'parse_query', 'wtnerd_global_vars' );
 
 function tbare_wordpress_plugin_demo($atts) {	 
     return get_option('handle');
 }
 
-add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
-// function callback_for_setting_up_scripts() {
-//     wp_register_style( 'namespace', 'style.css' );
-//     wp_enqueue_style( 'namespace' );
-//     wp_enqueue_script( 'namespaceformyscript', 'script.js', array( 'jquery' ) );
-// }
-
 function request_check($atts){
     echo "<section class=\"regular slider\">";
 
     $url = 'https://www.instagram.com/thefirm.official/?__a=1';
     $contents = file_get_contents($url);
+    $amountvid = 0;
 
     // Get INSTATV Shortcode 
     if($contents !== false){
@@ -85,11 +92,12 @@ function request_check($atts){
 
                 $src = $resJSON->graphql->shortcode_media->video_url;
 
-                echo "<div class=\"item";
+                echo "<div class=\"item slick-tile";
                 if($first){
                     echo " active";
                     $first = false;
                 }
+                echo "\">";
                 echo "<div class=\"video-wrapper\">";
                 echo "<video class=\"img-responsive\" controls=\"\" 
                 controlslist=\"nodownload\" 
@@ -98,11 +106,22 @@ function request_check($atts){
                 poster=\"". $poster ."\" preload=\"metadata\" type=\"video/mp4\" src=\"". $src ."\" 
                 loop=\"\"></video>";
                 echo "</div>";
+                echo "</div>";
             }
+
+        }
+    }
+
+    if(sizeof($IGTVobjects)<6){
+        $loop = sizeof($IGTVobjects);
+        for($x = 0; $x < 6 - $loop; $x++){
+            echo "<div class=\"slick-tile\" style=\"border: 1px solid white; height: 9vw;\"><img></div>";
         }
     }
     
     echo "</section>";
+
+
 }
 
 add_shortcode('IGTV-wordpress', 'request_check');

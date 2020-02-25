@@ -10,30 +10,30 @@
  */
 
 // ADMIN PANEL 
-
-add_action('admin_menu', 'igtv_plugin_setup_menu');
-
-
-// function register_my_cool_plugin_settings() {
-//     register_setting( 'handle', 'new_option_name' );
-// }
-
+// REGISTER PANEL
 function igtv_plugin_setup_menu(){
     add_menu_page( 'IGTV Plugin Page', 'IGTV Plugin', 'manage_options', 'igtv-plugin', 'settings_panel' );
 }
 
+add_action('admin_menu', 'igtv_plugin_setup_menu');
+// REGISTER SETTINGS
+function plugin_register_settings() {
+    add_option( 'igtv-handle', 'Handle for IGTV page');
+    register_setting( 'igtv_plugin_options_group', 'igtv-handle', 'igtv_plugin_callback' );
+ }
+add_action( 'admin_init', 'plugin_register_settings' );
+
+// ADMIN PANEL VIEW
 function settings_panel(){
-    global $instagram_handle;
-    $instagram_handle = 'erwinruss';
     ?>
     <div class="wrap">
     <h1>IGTV Plugin</h1>
     <form action="options.php" method="post">
     <?php
-    settings_fields( 'myoption-group' );
-    do_settings_sections( 'myoption-group' );
+    settings_fields( 'igtv_plugin_options_group' );
+    // do_settings_sections( 'igtv_plugin_options_group' );
     ?>
-    Instagram Handle: <input type="text" name="handle"><br>
+    Instagram Handle: <input type="text" id="igtv-handle" name="igtv-handle" value="<?php echo get_option('igtv-handle'); ?>"><br>
     <?php submit_button(); ?>
     </form>
     </div>
@@ -45,10 +45,6 @@ function settings_panel(){
         }
     }
 }
-
-// function tbare_wordpress_plugin_demo($atts) {	 
-//     return get_option('handle');
-// }
 
 add_action( 'parse_query', 'wtnerd_global_vars' );
 
@@ -73,7 +69,8 @@ function callback_for_setting_up_scripts() {
 function request_check($atts){
     echo "<section class=\"regular slider\">";
 
-    $url = 'https://www.instagram.com/thefirm.official/?__a=1';
+    $url = "https://www.instagram.com/" . get_option('igtv-handle') . "/?__a=1";
+    // $url = 'https://www.instagram.com/thefirm.official/?__a=1';
     $contents = file_get_contents($url);
     $amountvid = 0;
 

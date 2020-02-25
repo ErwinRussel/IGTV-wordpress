@@ -34,7 +34,7 @@ function settings_panel(){
     settings_fields( 'igtv_plugin_options_group' );
     // do_settings_sections( 'igtv_plugin_options_group' );
     ?>
-    Instagram Handle: <input type="text" id="igtv-handle" name="igtv-handle" value="<?php echo get_option('igtv-handle'); ?>"><br>
+    Instagram handle: <input type="text" id="igtv-handle" name="igtv-handle" value="<?php echo get_option('igtv-handle'); ?>"><br>
     <?php submit_button(); ?>
     </form>
     </div>

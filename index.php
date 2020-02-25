@@ -9,19 +9,20 @@
  * Author URI: https://www.erwinrussel.com
  */
 
-add_action('admin_menu', 'test_plugin_setup_menu');
- 
-add_action('admin_menu', 'my_cool_plugin_create_menu');
+// ADMIN PANEL 
 
-function register_my_cool_plugin_settings() {
-    register_setting( 'handle', 'new_option_name' );
+add_action('admin_menu', 'igtv_plugin_setup_menu');
+
+
+// function register_my_cool_plugin_settings() {
+//     register_setting( 'handle', 'new_option_name' );
+// }
+
+function igtv_plugin_setup_menu(){
+    add_menu_page( 'IGTV Plugin Page', 'IGTV Plugin', 'manage_options', 'igtv-plugin', 'settings_panel' );
 }
 
-function test_plugin_setup_menu(){
-        add_menu_page( 'Test Plugin Page', 'IGTV Plugin', 'manage_options', 'test-plugin', 'test_init' );
-}
-
-function test_init(){
+function settings_panel(){
     global $instagram_handle;
     $instagram_handle = 'erwinruss';
     ?>
@@ -45,6 +46,16 @@ function test_init(){
     }
 }
 
+// function tbare_wordpress_plugin_demo($atts) {	 
+//     return get_option('handle');
+// }
+
+add_action( 'parse_query', 'wtnerd_global_vars' );
+
+// PLUGIN 
+
+// LOAD SCRIPTS AND STYLES
+
 add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
 
 function callback_for_setting_up_scripts() {
@@ -57,11 +68,7 @@ function callback_for_setting_up_scripts() {
     wp_enqueue_script('IGTVscript', plugins_url() .'/wordpress-IGTV/IGTVscript.js', array ( 'jquery' ), false ,true);
 }
 
-add_action( 'parse_query', 'wtnerd_global_vars' );
-
-function tbare_wordpress_plugin_demo($atts) {	 
-    return get_option('handle');
-}
+// IGTV REQUEST
 
 function request_check($atts){
     echo "<section class=\"regular slider\">";
@@ -123,6 +130,8 @@ function request_check($atts){
 
 
 }
+
+// SHORTCODE
 
 add_shortcode('IGTV-wordpress', 'request_check');
 ?>

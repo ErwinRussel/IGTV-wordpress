@@ -61,6 +61,7 @@ function callback_for_setting_up_scripts() {
 // IGTV REQUEST
 
 function request_check($atts){
+    echo "<div class=\"igtv-plugin\">";
     echo "<section class=\"regular slider\">";
 
     $url = "https://www.instagram.com/" . get_option('igtv-handle') . "/?__a=1";
@@ -113,11 +114,12 @@ function request_check($atts){
     if(sizeof($IGTVobjects)<6){
         $loop = sizeof($IGTVobjects);
         for($x = 0; $x < 7 - $loop; $x++){
-            echo "<div class=\"slick-tile\" style=\"border: 1px solid white;\"><img></div>";
+            echo "<div class=\"slick-tile\" style=\"border: 2px solid #282828;\"><img></div>";
         }
     }
     
     echo "</section>";
+    echo "</div>";
 
 
 }
